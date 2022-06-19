@@ -15,8 +15,13 @@ class LoginPage extends StatefulWidget {
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
+
 class _LoginPageState extends State<LoginPage> {
   @override
+  var _passwordVisible = false;
+  void initState() {
+    _passwordVisible = false;
+  }
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -71,12 +76,58 @@ class _LoginPageState extends State<LoginPage> {
                         height: 20,
                       ),
                       TextField(
-                          obscureText: true,
-                          enableSuggestions: false,
-                          autocorrect: false,
-                          controller: _passwordController,
-                          style: inputstyle(),
-                          decoration: inputdec("Password", Icons.lock_outline)),
+                        obscureText: !_passwordVisible,
+                        enableSuggestions: false,
+                        autocorrect: false,
+                        controller: _passwordController,
+                        style: inputstyle(),
+                        decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                _passwordVisible
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: Colors.black,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _passwordVisible = !_passwordVisible;
+                                });
+                              },
+                            ),
+                            fillColor: Colors.white,
+                            filled: true,
+                            border: new OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0)),
+                                borderSide:
+                                    new BorderSide(color: Colors.black)),
+                            focusedBorder: new OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0)),
+                                borderSide: new BorderSide(color: Colors.cyan)),
+                            enabledBorder: new OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0)),
+                                borderSide:
+                                    new BorderSide(color: Colors.black)),
+                            errorBorder: InputBorder.none,
+                            disabledBorder: InputBorder.none,
+                            hintStyle: TextStyle(
+                              fontSize: 16, // or whatever
+                              color: Colors.grey,
+                              height:
+                                  2.2, //                                <----- this was the key
+                            ),
+                            prefixIcon: Icon(
+                              Icons.lock_outline,
+                              size: 20,
+                              color: Colors.black,
+                            ),
+                            contentPadding: EdgeInsets.all(0),
+                            isDense: true,
+                            hintText: "Password"),
+                      ),
                       Padding(
                         padding: EdgeInsets.only(top: 20),
                         child: MaterialButton(
