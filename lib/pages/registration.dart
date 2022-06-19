@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:project/utils/styles.dart';
-
-import 'addons.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({super.key});
@@ -18,40 +17,72 @@ class RegistrationPage extends StatefulWidget {
 class _RegistrationPageState extends State<RegistrationPage> {
   int _selectedIndex = 0;
 
+  void showToast(String s, Color c) {
+    Fluttertoast.showToast(
+        msg: s,
+        toastLength: Toast.LENGTH_SHORT,
+        backgroundColor: c,
+        textColor: Colors.white);
+  }
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
 
-  void _regbutton() async {
+  void _regbuttonStudent() async {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
-          email: _emailController.text, password: "123456");
+          email: _emailControllerStudent.text, password: "123456");
       users
           .add({
-            'Name': _nameController.text,
-            'emailid': _emailController.text,
+            'Name': _nameControllerStudent.text,
+            'emailid': _emailControllerStudent.text,
             'password': "123456"
           })
           .then((value) => print("User Added"))
           .catchError((error) => print("Failed to add user: $error"));
-      toast_s("Registration Sucessful", context);
+      showToast('Registration Successful', Colors.grey[500]!);
       Get.toNamed('/login');
     } catch (e) {
       String error;
       error = e.toString();
       int kpp = error.lastIndexOf(']') + 1;
-      toast(error.substring(kpp), context);
-    }
-    ;
+      showToast('${error.substring(kpp)}', Colors.red[300]!);
+    };
+  }
+
+  void _regbuttonTeacher() async {
+    try {
+      await _firebaseAuth.createUserWithEmailAndPassword(
+          email: _emailControllerTeacher.text, password: "123456");
+      users
+          .add({
+            'Name': _nameControllerTeacher.text,
+            'emailid': _emailControllerTeacher.text,
+            'password': "123456"
+          })
+          .then((value) => print("User Added"))
+          .catchError((error) => print("Failed to add user: $error"));
+      showToast('Registration Successful', Colors.grey[500]!);
+      Get.toNamed('/login');
+    } catch (e) {
+      String error;
+      error = e.toString();
+      int kpp = error.lastIndexOf(']') + 1;
+      showToast('${error.substring(kpp)}', Colors.red[300]!);
+    };
   }
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _nameControllerStudent = TextEditingController();
+  final TextEditingController _emailControllerStudent = TextEditingController();
+  final TextEditingController _nameControllerTeacher = TextEditingController();
+  final TextEditingController _emailControllerTeacher = TextEditingController();
   CollectionReference users = FirebaseFirestore.instance.collection('users');
   @override
+
   Widget build(BuildContext context) {
     List<Widget> _widgetOptions = <Widget>[
       Container(
@@ -72,31 +103,31 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 child: Text(
                   'All Fields marked aestriks(*) are mandatory.',
                   style: TextStyle(
-                    fontSize: 13, // or whatever
+                    fontSize:
+                        MediaQuery.of(context).size.width * 0.04, // or whatever
                     color: Colors.red,
                   ),
                 ),
               ),
-              // inputdec("Admission Number*", Icons.person_sharp),
               SizedBox(
                 height: 20,
               ),
               TextField(
-                  controller: _nameController,
+                  controller: _nameControllerStudent,
                   style: inputstyle(),
                   decoration: inputdec("Name*", Icons.person_outline)),
               SizedBox(
                 height: 20,
               ),
               TextField(
-                  controller: _emailController,
+                  controller: _emailControllerStudent,
                   style: inputstyle(),
                   decoration: inputdec("Email*", Icons.person_outline)),
               SizedBox(
                 height: 20,
               ),
               MaterialButton(
-                onPressed: () => _regbutton(),
+                onPressed: () => _regbuttonStudent(),
                 child: Text(
                   'REGISTER',
                   style: TextStyle(
@@ -139,7 +170,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 child: Text(
                   'All Fields marked aestriks(*) are mandatory.',
                   style: TextStyle(
-                    fontSize: 13, // or whatever
+                    fontSize: MediaQuery.of(context).size.width * 0.04,
                     color: Colors.red,
                   ),
                 ),
@@ -148,21 +179,21 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 height: 20,
               ),
               TextField(
-                  controller: _nameController,
+                  controller: _nameControllerTeacher,
                   style: inputstyle(),
                   decoration: inputdec("Name*", Icons.person_outline)),
               SizedBox(
                 height: 20,
               ),
               TextField(
-                  controller: _emailController,
+                  controller: _emailControllerTeacher,
                   style: inputstyle(),
                   decoration: inputdec("Email*", Icons.person_outline)),
               SizedBox(
                 height: 20,
               ),
               MaterialButton(
-                onPressed: () => _regbutton(),
+                onPressed: () => _regbuttonTeacher(),
                 child: Text(
                   'REGISTER',
                   style: TextStyle(

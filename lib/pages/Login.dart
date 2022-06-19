@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:project/utils/styles.dart';
 
@@ -19,6 +20,14 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   @override
+  void showToast(String s, Color c) {
+    Fluttertoast.showToast(
+        msg: s,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: c,
+        textColor: Colors.white);
+  }
   var _passwordVisible = false;
   void initState() {
     _passwordVisible = false;
@@ -145,11 +154,12 @@ class _LoginPageState extends State<LoginPage> {
                                   .then((value) => print('Login Successful'));
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => FirstPage()));
+                              showToast('Login Successful', Colors.grey[500]!);
                             } catch (e) {
                               String error;
                               error = e.toString();
                               int kpp = error.lastIndexOf(']') + 1;
-                              toast(error.substring(kpp), context);
+                              showToast('${error.substring(kpp)}', Colors.red[300]!);
                             }
                           },
                           child: Text(
