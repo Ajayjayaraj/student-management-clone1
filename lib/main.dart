@@ -26,14 +26,14 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        initialRoute: '/',
-        getPages: [
-          GetPage(name: '/', page: () => HomePage()),
-          GetPage(name: '/login', page: () => LoginPage()),
-          GetPage(name: '/register', page: () => RegistrationPage()),
-          GetPage(name: '/first', page: () => FirstPage()),
-        ],
-      );
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/',
+      getPages: [
+        GetPage(name: '/', page: () => HomePage()),
+        GetPage(name: '/login', page: () => LoginPage()),
+        GetPage(name: '/register', page: () => RegistrationPage()),
+        GetPage(name: '/first', page: () => FirstPage()),
+      ],
+    );
   }
 }

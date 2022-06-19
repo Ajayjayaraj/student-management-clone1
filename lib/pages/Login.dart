@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:project/utils/styles.dart';
 
+import 'addons.dart';
 import 'firstpage.dart';
 import 'registration.dart';
 
@@ -15,11 +16,13 @@ class LoginPage extends StatefulWidget {
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
+
 class _LoginPageState extends State<LoginPage> {
   @override
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -93,7 +96,10 @@ class _LoginPageState extends State<LoginPage> {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => FirstPage()));
                             } catch (e) {
-                              print(e);
+                              String error;
+                              error = e.toString();
+                              int kpp = error.lastIndexOf(']') + 1;
+                              toast(error.substring(kpp), context);
                             }
                           },
                           child: Text(
