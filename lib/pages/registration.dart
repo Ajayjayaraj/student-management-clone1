@@ -6,6 +6,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:project/utils/styles.dart';
 
+import 'addons.dart';
+
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({super.key});
 
@@ -34,10 +36,15 @@ class _RegistrationPageState extends State<RegistrationPage> {
           })
           .then((value) => print("User Added"))
           .catchError((error) => print("Failed to add user: $error"));
+      toast_s("Registration Sucessful", context);
+      Get.toNamed('/login');
     } catch (e) {
-      print(e);
-    };
-    Get.toNamed('/login');
+      String error;
+      error = e.toString();
+      int kpp = error.lastIndexOf(']') + 1;
+      toast(error.substring(kpp), context);
+    }
+    ;
   }
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
