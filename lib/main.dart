@@ -1,6 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:project/Login.dart';
+import 'package:get/get.dart';
+import 'pages/Login.dart';
+import 'pages/firstpage.dart';
+import 'pages/homepage.dart';
+import 'pages/registration.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,8 +25,15 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: LoginPage(),
-    );
+    return GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: '/',
+        getPages: [
+          GetPage(name: '/', page: () => HomePage()),
+          GetPage(name: '/login', page: () => LoginPage()),
+          GetPage(name: '/register', page: () => RegistrationPage()),
+          GetPage(name: '/first', page: () => FirstPage()),
+        ],
+      );
   }
 }
