@@ -6,10 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:project/utils/styles.dart';
-
-import 'addons.dart';
 import 'firstpage.dart';
-import 'registration.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
