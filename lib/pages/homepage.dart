@@ -13,16 +13,16 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //appBar: AppBar(title: Text("Getx tutorial"),),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.school_outlined, size: 80,),
-            Text("Student Authentication", style: TextStyle(fontSize: 20),),
+            Icon(Icons.school_outlined, size: MediaQuery.of(context).size.height*0.15),
+            SizedBox(height: MediaQuery.of(context).size.height*0.05),
+            Text("Authentication", style: TextStyle(fontSize: MediaQuery.of(context).size.width*0.08),),
             Container(
-              padding: EdgeInsets.only(top: 20),
-              margin: EdgeInsets.symmetric(horizontal: 50,vertical: 0),
+              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.1),
+              margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.13,vertical: 0),
               child: MaterialButton(
                 onPressed: (){
                   Get.toNamed("/login");
@@ -45,8 +45,8 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Container(
-              padding: EdgeInsets.only(top: 20),
-              margin: EdgeInsets.symmetric(horizontal: 50,vertical: 0),
+              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.025),
+              margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.13,vertical: 0),
               child: MaterialButton(
                 onPressed: (){
                   // Navigator.push(context, MaterialPageRoute(builder: (context) => RegPage()));

@@ -50,7 +50,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
       error = e.toString();
       int kpp = error.lastIndexOf(']') + 1;
       showToast('${error.substring(kpp)}', Colors.red[300]!);
-    };
+    }
+    ;
   }
 
   void _regbuttonTeacher() async {
@@ -72,7 +73,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
       error = e.toString();
       int kpp = error.lastIndexOf(']') + 1;
       showToast('${error.substring(kpp)}', Colors.red[300]!);
-    };
+    }
+    ;
   }
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -82,7 +84,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final TextEditingController _emailControllerTeacher = TextEditingController();
   CollectionReference users = FirebaseFirestore.instance.collection('users');
   @override
-
   Widget build(BuildContext context) {
     List<Widget> _widgetOptions = <Widget>[
       Container(
@@ -122,7 +123,28 @@ class _RegistrationPageState extends State<RegistrationPage> {
               TextField(
                   controller: _emailControllerStudent,
                   style: inputstyle(),
-                  decoration: inputdec("Email*", Icons.person_outline)),
+                  decoration: inputdec("Email*", Icons.email_outlined)),
+              SizedBox(
+                height: 20,
+              ),
+              TextField(
+                  // controller: _nameControllerStudent,
+                  style: inputstyle(),
+                  decoration: inputdec("Admission No*", Icons.person_outline)),
+              SizedBox(
+                height: 20,
+              ),
+              TextField(
+                  // controller: _emailControllerStudent,
+                  style: inputstyle(),
+                  decoration: inputdec("Dob*", Icons.date_range_outlined)),
+              SizedBox(
+                height: 20,
+              ),
+              TextField(
+                  // controller: _emailControllerStudent,
+                  style: inputstyle(),
+                  decoration: inputdec("Aadhar No*", Icons.school_outlined)),
               SizedBox(
                 height: 20,
               ),
@@ -188,7 +210,28 @@ class _RegistrationPageState extends State<RegistrationPage> {
               TextField(
                   controller: _emailControllerTeacher,
                   style: inputstyle(),
-                  decoration: inputdec("Email*", Icons.person_outline)),
+                  decoration: inputdec("Email*", Icons.email_outlined)),
+              SizedBox(
+                height: 20,
+              ),
+              TextField(
+                  // controller: _nameControllerStudent,
+                  style: inputstyle(),
+                  decoration: inputdec("Employee Id*", Icons.person_outline)),
+              SizedBox(
+                height: 20,
+              ),
+              TextField(
+                  // controller: _emailControllerStudent,
+                  style: inputstyle(),
+                  decoration: inputdec("Dob*", Icons.date_range_outlined)),
+              SizedBox(
+                height: 20,
+              ),
+              TextField(
+                  // controller: _emailControllerStudent,
+                  style: inputstyle(),
+                  decoration: inputdec("Department*", Icons.school_outlined)),
               SizedBox(
                 height: 20,
               ),
