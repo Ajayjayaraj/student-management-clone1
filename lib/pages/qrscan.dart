@@ -46,10 +46,6 @@ class _QrScanState extends State<QrScan> {
               },
               child: Text("Scan"),
             ),
-            SizedBox(
-              height: 30,
-            ),
-            Text(cameraScanResult.toString())
           ],
         ))),
       ),
