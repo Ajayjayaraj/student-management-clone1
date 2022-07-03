@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project/pages/qrgenerator.dart';
 
 class FirstPage extends StatefulWidget {
   const FirstPage({Key? key}) : super(key: key);
@@ -23,15 +24,21 @@ class _FirstPageState extends State<FirstPage> {
           ),
         ),
         body: Center(
-          child: Text(
-            'Work in progress',
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
-              ),
-            ),
+          child: MaterialButton(
+            color: Colors.cyan, //Color(0xffff2d55),
+            elevation: 0,
+            minWidth: 200,
+            height: 50,
+            textColor: Colors.white,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            child: Text("Qr Generator"),
+            onPressed: () {
+              Get.toNamed('/qrgenerator');
+            },
+          ),
         ),
+      ),
     );
   }
 }
