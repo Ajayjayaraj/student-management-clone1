@@ -25,8 +25,24 @@ class _FirstPageState extends State<FirstPage> {
         ),
         body: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            MaterialButton(
+              color: Colors.cyan, //Color(0xffff2d55),
+              elevation: 0,
+              minWidth: 200,
+              height: 50,
+              textColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              child: Text("Registration"),
+              onPressed: () {
+                Get.toNamed('/register');
+              },
+            ),
+            SizedBox(
+              height: 30,
+            ),
             MaterialButton(
               color: Colors.cyan, //Color(0xffff2d55),
               elevation: 0,

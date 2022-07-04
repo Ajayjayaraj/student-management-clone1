@@ -25,10 +25,12 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: c,
         textColor: Colors.white);
   }
+
   var _passwordVisible = false;
   void initState() {
     _passwordVisible = false;
   }
+
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -149,13 +151,14 @@ class _LoginPageState extends State<LoginPage> {
                                       email: _emailController.text,
                                       password: _passwordController.text)
                                   .then((value) => print('Login Successful'));
-                              Get.toNamed("/register");
+                              Get.toNamed("/first");
                               showToast('Login Successful', Colors.grey[500]!);
                             } catch (e) {
                               String error;
                               error = e.toString();
                               int kpp = error.lastIndexOf(']') + 1;
-                              showToast('${error.substring(kpp)}', Colors.red[300]!);
+                              showToast(
+                                  '${error.substring(kpp)}', Colors.red[300]!);
                             }
                           },
                           child: Text(

@@ -42,7 +42,7 @@ dependencies:
   fluttertoast: 
   qr_flutter: ^4.0.0
   permission_handler: ^10.0.0
-  qrscan: ^0.3.2
+  qrscan: 
 
 dev_dependencies:
   flutter_test:
