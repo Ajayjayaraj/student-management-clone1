@@ -38,8 +38,16 @@ class _RegistrationPageState extends State<RegistrationPage> {
       students
           .add({
             'Name': _nameControllerStudent.text,
-            'emailid': _emailControllerStudent.text,
-            'password': "123456"
+            'Email_Id': _emailControllerStudent.text,
+            'DOB': _dobControllerStudent.text,
+            'Phone': _phoneControllerStudent.text,
+            'Aadhaar': _aadhaarControllerStudent.text,
+            'Address': _addressControllerStudent.text,
+            'Admission_No': _admissionControllerStudent.text,
+            'Department': _deptControllerStudent.text,
+            'Year': _yearControllerStudent.text,
+            'Entrance_Rank': _rankControllerStudent.text,
+            'Password': "123456"
           })
           .then((value) => print("User Added"))
           .catchError((error) => print("Failed to add user: $error"));
@@ -61,9 +69,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
       teachers
           .add({
             'Name': _nameControllerTeacher.text,
-            'emailid': _emailControllerTeacher.text,
-            'dob': _dobControllerStudent.text,
-            'password': "123456"
+            'Email_Id': _emailControllerTeacher.text,
+            'Employee_Id': _employeeIdControllerTeacher.text,
+            'Department': _deptControllerTeacher.text,
+            'Password': "123456"
           })
           .then((value) => print("User Added"))
           .catchError((error) => print("Failed to add user: $error"));
