@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/utils/global.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class QrGenerator extends StatefulWidget {
@@ -34,27 +35,20 @@ class _QrGeneratorState extends State<QrGenerator> {
               "QR Code Generator",
               style: TextStyle(fontSize: 20.0),
             ),
-            TextField(
-              controller: qrtext,
-              decoration: InputDecoration(
-                hintText: "Input your link or data",
-              ),
-            ),
+            // TextField(
+            //   controller: qrtext,
+            //   decoration: InputDecoration(
+            //     hintText: "Input your link or data",
+            //   ),
+            // ),
             Padding(
               padding: EdgeInsets.fromLTRB(40, 20, 40, 0),
               child: MaterialButton(
                 padding: EdgeInsets.all(15.0),
                 onPressed: () async {
-                  if (qrtext.text.isEmpty) {
-                    //a little validation for the textfield
                     setState(() {
-                      qrData = "";
+                      qrData = CStudent.admission;
                     });
-                  } else {
-                    setState(() {
-                      qrData = qrtext.text;
-                    });
-                  }
                 },
                 child: Text(
                   "Generate QR",
