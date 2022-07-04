@@ -59,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
               Container(
                 width: MediaQuery.of(context).size.width,
                 margin: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.3),
+                    top: MediaQuery.of(context).size.height * 0.29),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: Colors.white,
@@ -149,8 +149,7 @@ class _LoginPageState extends State<LoginPage> {
                                       email: _emailController.text,
                                       password: _passwordController.text)
                                   .then((value) => print('Login Successful'));
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => FirstPage()));
+                              Get.toNamed("/register");
                               showToast('Login Successful', Colors.grey[500]!);
                             } catch (e) {
                               String error;
@@ -187,7 +186,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           MaterialButton(
                               onPressed: () {
-                                Get.toNamed("/register");
+                                // Get.toNamed("/register");
                               },
                               child: Text("Register now",
                                   style: TextStyle(

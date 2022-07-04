@@ -44,31 +44,31 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            Container(
-              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.025),
-              margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.13,vertical: 0),
-              child: MaterialButton(
-                onPressed: (){
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) => RegPage()));
-                  Get.toNamed("/register");
-                },//since this is only a UI app
-                child: Text('REGISTER',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontFamily: 'SFUIDisplay',
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                color: Colors.amber,//Color(0xffff2d55),
-                elevation: 0,
-                minWidth: 400,
-                height: 50,
-                textColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)
-                ),
-              ),
-            ),
+            // Container(
+            //   padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.025),
+            //   margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.13,vertical: 0),
+            //   child: MaterialButton(
+            //     onPressed: (){
+            //       // Navigator.push(context, MaterialPageRoute(builder: (context) => RegPage()));
+            //       Get.toNamed("/register");
+            //     },//since this is only a UI app
+            //     child: Text('REGISTER',
+            //       style: TextStyle(
+            //         fontSize: 15,
+            //         fontFamily: 'SFUIDisplay',
+            //         fontWeight: FontWeight.bold,
+            //       ),
+            //     ),
+            //     color: Colors.amber,//Color(0xffff2d55),
+            //     elevation: 0,
+            //     minWidth: 400,
+            //     height: 50,
+            //     textColor: Colors.white,
+            //     shape: RoundedRectangleBorder(
+            //         borderRadius: BorderRadius.circular(10)
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

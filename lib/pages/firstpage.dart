@@ -25,6 +25,7 @@ class _FirstPageState extends State<FirstPage> {
         ),
         body: Center(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
           children: [
             MaterialButton(
               color: Colors.cyan, //Color(0xffff2d55),

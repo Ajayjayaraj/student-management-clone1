@@ -44,7 +44,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
           .then((value) => print("User Added"))
           .catchError((error) => print("Failed to add user: $error"));
       showToast('Registration Successful', Colors.grey[500]!);
-      Get.toNamed('/login');
+      Get.toNamed('/first');
     } catch (e) {
       String error;
       error = e.toString();
@@ -67,7 +67,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
           .then((value) => print("User Added"))
           .catchError((error) => print("Failed to add user: $error"));
       showToast('Registration Successful', Colors.grey[500]!);
-      Get.toNamed('/login');
+      Get.toNamed('/first');
     } catch (e) {
       String error;
       error = e.toString();
@@ -88,7 +88,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
     List<Widget> _widgetOptions = <Widget>[
       Container(
         width: MediaQuery.of(context).size.width,
-        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.3),
+        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.29),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: Colors.white,
@@ -113,24 +113,21 @@ class _RegistrationPageState extends State<RegistrationPage> {
               SizedBox(
                 height: 20,
               ),
+              Padding(
+                padding: EdgeInsets.only(bottom: 10),
+                child: Text(
+                  'Personal Details',
+                  style: TextStyle(
+                    fontSize:
+                        MediaQuery.of(context).size.width * 0.05, // or whatever
+                    color: Colors.black,
+                  ),
+                ),
+              ),
               TextField(
                   controller: _nameControllerStudent,
                   style: inputstyle(),
                   decoration: inputdec("Name*", Icons.person_outline)),
-              SizedBox(
-                height: 20,
-              ),
-              TextField(
-                  controller: _emailControllerStudent,
-                  style: inputstyle(),
-                  decoration: inputdec("Email*", Icons.email_outlined)),
-              SizedBox(
-                height: 20,
-              ),
-              TextField(
-                  // controller: _nameControllerStudent,
-                  style: inputstyle(),
-                  decoration: inputdec("Admission No*", Icons.person_outline)),
               SizedBox(
                 height: 20,
               ),
@@ -144,7 +141,61 @@ class _RegistrationPageState extends State<RegistrationPage> {
               TextField(
                   // controller: _emailControllerStudent,
                   style: inputstyle(),
+                  decoration: inputdec("Phone No*", Icons.school_outlined)),
+              SizedBox(
+                height: 20,
+              ),
+              TextField(
+                  // controller: _emailControllerStudent,
+                  style: inputstyle(),
                   decoration: inputdec("Aadhar No*", Icons.school_outlined)),
+              SizedBox(
+                height: 20,
+              ),
+              TextField(
+                  // controller: _emailControllerStudent,
+                  style: inputstyle(),
+                  maxLines: 4,
+                  decoration: inputdec("Address*", Icons.school_outlined)),
+              SizedBox(
+                height: 30,
+              ),
+              Padding(
+                padding: EdgeInsets.only(bottom: 10),
+                child: Text(
+                  'Academic Details',
+                  style: TextStyle(
+                    fontSize:
+                        MediaQuery.of(context).size.width * 0.05, // or whatever
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              TextField(
+                  // controller: _nameControllerStudent,
+                  style: inputstyle(),
+                  decoration: inputdec("Admission No*", Icons.person_outline)),
+              SizedBox(
+                height: 20,
+              ),
+              TextField(
+                  // controller: _emailControllerStudent,
+                  style: inputstyle(),
+                  decoration: inputdec("Department*", Icons.school_outlined)),
+              SizedBox(
+                height: 20,
+              ),
+              TextField(
+                  // controller: _emailControllerStudent,
+                  style: inputstyle(),
+                  decoration: inputdec("Year*", Icons.school_outlined)),
+              SizedBox(
+                height: 20,
+              ),
+              TextField(
+                  // controller: _emailControllerStudent,
+                  style: inputstyle(),
+                  decoration: inputdec("Entrance Rank*", Icons.school_outlined)),
               SizedBox(
                 height: 20,
               ),
@@ -218,13 +269,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   // controller: _nameControllerStudent,
                   style: inputstyle(),
                   decoration: inputdec("Employee Id*", Icons.person_outline)),
-              SizedBox(
-                height: 20,
-              ),
-              TextField(
-                  // controller: _emailControllerStudent,
-                  style: inputstyle(),
-                  decoration: inputdec("Dob*", Icons.date_range_outlined)),
               SizedBox(
                 height: 20,
               ),
