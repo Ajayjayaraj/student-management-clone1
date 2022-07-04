@@ -54,6 +54,15 @@ class _RegistrationPageState extends State<RegistrationPage> {
           .catchError((error) => print("Failed to add user: $error"));
       showToast('Registration Successful', Colors.grey[500]!);
       CStudent.name = _nameControllerStudent.text;
+      CStudent.email = _emailControllerStudent.text;
+      CStudent.dob = _dobControllerStudent.text;
+      CStudent.phone = _phoneControllerStudent.text;
+      CStudent.aadhaar = _aadhaarControllerStudent.text;
+      CStudent.address = _addressControllerStudent.text;
+      CStudent.admission = _admissionControllerStudent.text;
+      CStudent.dept = _deptControllerStudent.text;
+      CStudent.year = _yearControllerStudent.text;
+      CStudent.rank = _rankControllerStudent.text;
       Get.toNamed('/first');
     } catch (e) {
       String error;
@@ -79,6 +88,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
           .then((value) => print("User Added"))
           .catchError((error) => print("Failed to add user: $error"));
       showToast('Registration Successful', Colors.grey[500]!);
+      CTeacher.name = _nameControllerTeacher.text;
+      CTeacher.email = _emailControllerTeacher.text;
+      CTeacher.employeeId = _employeeIdControllerTeacher.text;
+      CTeacher.dept = _deptControllerTeacher.text;
       Get.toNamed('/first');
     } catch (e) {
       String error;
