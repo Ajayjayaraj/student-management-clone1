@@ -95,6 +95,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final TextEditingController _deptControllerTeacher = TextEditingController();
 
   CollectionReference users = FirebaseFirestore.instance.collection('users');
+  CollectionReference teachers =
+      FirebaseFirestore.instance.collection('teachers');
+  CollectionReference students =
+      FirebaseFirestore.instance.collection('students');
   @override
   Widget build(BuildContext context) {
     List<Widget> _widgetOptions = <Widget>[
@@ -214,7 +218,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
               TextField(
                   controller: _rankControllerStudent,
                   style: inputstyle(),
-                  decoration: inputdec("Entrance Rank*", Icons.school_outlined)),
+                  decoration:
+                      inputdec("Entrance Rank*", Icons.school_outlined)),
               SizedBox(
                 height: 20,
               ),
