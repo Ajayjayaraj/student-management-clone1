@@ -35,7 +35,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
           email: _emailControllerStudent.text, password: "123456");
-      users
+      students
           .add({
             'Name': _nameControllerStudent.text,
             'emailid': _emailControllerStudent.text,
@@ -58,10 +58,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
           email: _emailControllerTeacher.text, password: "123456");
-      users
+      teachers
           .add({
             'Name': _nameControllerTeacher.text,
             'emailid': _emailControllerTeacher.text,
+            'dob': _dobControllerStudent.text,
             'password': "123456"
           })
           .then((value) => print("User Added"))
@@ -82,16 +83,20 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final TextEditingController _emailControllerStudent = TextEditingController();
   final TextEditingController _dobControllerStudent = TextEditingController();
   final TextEditingController _phoneControllerStudent = TextEditingController();
-  final TextEditingController _aadhaarControllerStudent = TextEditingController();
-  final TextEditingController _addressControllerStudent = TextEditingController();
-  final TextEditingController _admissionControllerStudent = TextEditingController();
+  final TextEditingController _aadhaarControllerStudent =
+      TextEditingController();
+  final TextEditingController _addressControllerStudent =
+      TextEditingController();
+  final TextEditingController _admissionControllerStudent =
+      TextEditingController();
   final TextEditingController _deptControllerStudent = TextEditingController();
   final TextEditingController _yearControllerStudent = TextEditingController();
   final TextEditingController _rankControllerStudent = TextEditingController();
 
   final TextEditingController _nameControllerTeacher = TextEditingController();
   final TextEditingController _emailControllerTeacher = TextEditingController();
-  final TextEditingController _employeeIdControllerTeacher = TextEditingController();
+  final TextEditingController _employeeIdControllerTeacher =
+      TextEditingController();
   final TextEditingController _deptControllerTeacher = TextEditingController();
 
   CollectionReference users = FirebaseFirestore.instance.collection('users');
