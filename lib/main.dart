@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> {
         GetPage(name: '/register', page: () => RegistrationPage()),
         GetPage(name: '/first', page: () => FirstPage()),
         GetPage(name: '/qrgenerator', page: () => QrGenerator()),
-        // GetPage(name: '/qrscan', page: () => QrScan()),
+        GetPage(name: '/qrscan', page: () => QrScan()),
         GetPage(name: '/qrres', page: () => QrResult())
       ],
     );

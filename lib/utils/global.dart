@@ -4,3 +4,9 @@ class User {
 }
 
 User Cuser = new User();
+
+class Student {
+  String name = "";
+}
+
+Student CStudent = new Student();

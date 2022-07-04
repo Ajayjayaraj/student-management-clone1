@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:project/utils/global.dart';
 import 'package:project/utils/styles.dart';
 
 class RegistrationPage extends StatefulWidget {
@@ -52,6 +53,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
           .then((value) => print("User Added"))
           .catchError((error) => print("Failed to add user: $error"));
       showToast('Registration Successful', Colors.grey[500]!);
+      CStudent.name = _nameControllerStudent.text;
       Get.toNamed('/first');
     } catch (e) {
       String error;
