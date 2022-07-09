@@ -4,6 +4,7 @@ class User {
 }
 
 User Cuser = new User();
+String idtosearch = "";
 
 class Student {
   String name = "";

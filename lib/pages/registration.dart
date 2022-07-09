@@ -37,7 +37,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
       await _firebaseAuth.createUserWithEmailAndPassword(
           email: _emailControllerStudent.text, password: "123456");
       students
-          .add({
+          .doc(_admissionControllerStudent.text)
+          .set({
             'Name': _nameControllerStudent.text,
             'Email_Id': _emailControllerStudent.text,
             'DOB': _dobControllerStudent.text,
