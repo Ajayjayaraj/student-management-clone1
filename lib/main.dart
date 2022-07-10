@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
+      initialRoute: '/qrres',
       getPages: [
         GetPage(name: '/', page: () => HomePage()),
         GetPage(name: '/login', page: () => LoginPage()),
