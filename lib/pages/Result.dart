@@ -11,6 +11,37 @@ class QrResult extends StatefulWidget {
 
 class _QrResultState extends State<QrResult> {
   @override
+  CollectionReference _collectionRef =
+      FirebaseFirestore.instance.collection('students');
+
+  late var allData;
+  Future<void> getData() async {
+    // idtosearch = "B19CS054";
+    QuerySnapshot querySnapshot = await _collectionRef.get();
+    allData = await querySnapshot.docs.map((doc) => doc.data()).toList();
+    for (var i in allData) {
+      if (i["Admission_No"] == idtosearch) {
+        CStudent.name = i['Name'];
+        CStudent.email = i['Email_Id'];
+        CStudent.dob = i['DOB'];
+        CStudent.phone = i['Phone'];
+        CStudent.aadhaar = i['Aadhaar'];
+        CStudent.address = i['Address'];
+        CStudent.admission = i['Admission_No'];
+        CStudent.dept = i['Department'];
+        CStudent.year = i['Year'];
+        CStudent.rank = i['Entrance_Rank'];
+      }
+    }
+  }
+
+  @override
+  void initState() async {
+    // TODO: implement initState
+    super.initState();
+    await getData();
+  }
+
   Widget build(BuildContext context) {
     Widget abcd(String s1, String s2) {
       return Padding(
@@ -62,10 +93,6 @@ class _QrResultState extends State<QrResult> {
                   ),
                   abcd(CStudent.name, "Name"),
                   abcd(CStudent.email, "Email"),
-                  abcd(CStudent.dob, "DOB"),
-                  abcd(CStudent.phone, "Phone"),
-                  abcd(CStudent.aadhaar, "Aadhaar"),
-                  abcd(CStudent.address, "Address"),
                   abcd(CStudent.dob, "DOB"),
                   abcd(CStudent.phone, "Phone"),
                   abcd(CStudent.aadhaar, "Aadhaar"),

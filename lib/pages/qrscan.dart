@@ -18,14 +18,14 @@ class QrScan extends StatefulWidget {
 class _QrScanState extends State<QrScan> {
   @override
   String cameraScanResult = "k";
-  late var allData;
   CollectionReference _collectionRef =
       FirebaseFirestore.instance.collection('students');
 
+  late var allData;
   Future<void> getData() async {
     // idtosearch = "B19CS054";
     QuerySnapshot querySnapshot = await _collectionRef.get();
-    allData = querySnapshot.docs.map((doc) => doc.data()).toList();
+    allData = await querySnapshot.docs.map((doc) => doc.data()).toList();
     for (var i in allData) {
       if (i["Admission_No"] == idtosearch) {
         CStudent.name = i['Name'];
@@ -38,7 +38,6 @@ class _QrScanState extends State<QrScan> {
         CStudent.dept = i['Department'];
         CStudent.year = i['Year'];
         CStudent.rank = i['Entrance_Rank'];
-        break;
       }
     }
   }

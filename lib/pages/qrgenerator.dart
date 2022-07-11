@@ -35,20 +35,22 @@ class _QrGeneratorState extends State<QrGenerator> {
               "QR Code Generator",
               style: TextStyle(fontSize: 20.0),
             ),
-            // TextField(
-            //   controller: qrtext,
-            //   decoration: InputDecoration(
-            //     hintText: "Input your link or data",
-            //   ),
-            // ),
+            TextField(
+              controller: qrtext,
+              decoration: InputDecoration(
+                hintText: "Input your link or data",
+              ),
+            ),
             Padding(
               padding: EdgeInsets.fromLTRB(40, 20, 40, 0),
               child: MaterialButton(
                 padding: EdgeInsets.all(15.0),
                 onPressed: () async {
-                    setState(() {
-                      qrData = CStudent.admission;
-                    });
+                  setState(() {
+                    qrData = CStudent.admission;
+
+                    if (qrtext.text != "") qrData = qrtext.text;
+                  });
                 },
                 child: Text(
                   "Generate QR",
