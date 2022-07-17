@@ -57,8 +57,13 @@ class _LoginPageState extends State<LoginPage> {
             children: <Widget>[
               CachedNetworkImage(
                 imageUrl:
-                    "https://cdn.pixabay.com/photo/2019/03/21/15/51/chatbot-4071274_960_720.jpg",
-                // height: MediaQuery.of(context).size.height * 0.35,
+                    "https://i0.wp.com/www.artofvfx.com/IM2/IM2_PROLOGUE_VFX_15.jpg",
+                height: MediaQuery.of(context).size.height * 0.35,
+                width: MediaQuery.of(context).size.width,
+                fit: BoxFit.cover,
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.25,
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
@@ -69,7 +74,8 @@ class _LoginPageState extends State<LoginPage> {
                   color: Colors.white,
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(23),
+                  padding:
+                      EdgeInsets.all(MediaQuery.of(context).size.height * 0.02),
                   child: ListView(
                     shrinkWrap:
                         true, //you must add this if you place listview inside scrollview
@@ -149,8 +155,9 @@ class _LoginPageState extends State<LoginPage> {
                             onPressed: () async {
                               await ResetPassword(
                                   context, _emailController, _firebaseAuth);
-                              showToast(
-                                  "Reset Link has been Sent", Colors.grey);
+                              if (restsender == 1)
+                                showToast(
+                                    "Reset Link has been Sent", Colors.grey);
                             },
                             child: Text("Forgot password ?",
                                 style: TextStyle(

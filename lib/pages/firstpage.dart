@@ -84,15 +84,15 @@ class _FirstPageState extends State<FirstPage> {
                 Get.toNamed('/qrscan');
               },
             ),
-            // SizedBox(
-            //   height: 30,
-            // ),
-            // MaterialButton(
-            //   child: Text("Print"),
-            //   onPressed: () async {
-            //     await getData();
-            //   },
-            // )
+            SizedBox(
+              height: 30,
+            ),
+            MaterialButton(
+              child: Text("Print"),
+              onPressed: () {
+                print(Cuser.name);
+              },
+            )
           ],
         )),
       ),

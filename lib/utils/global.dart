@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../MainScreens/widgettree.dart';
+
+int restsender = 0;
 
 class UserApp {
   String name = "";
@@ -70,4 +73,20 @@ Future<Widget> Redirector2(String email) async {
     return Decider('/first');
   } else
     return Decider('/studentfirst');
+}
+
+Future<void> getDetails() async {
+  CollectionReference _collectionRef =
+      FirebaseFirestore.instance.collection('users');
+  late var allData;
+  User? user = FirebaseAuth.instance.currentUser;
+  String namefinder = (user!.email).toString();
+  QuerySnapshot querySnapshot = await _collectionRef.get();
+  allData = await querySnapshot.docs.map((doc) => doc.data()).toList();
+  for (var i in allData) {
+    if (i["Email"] == namefinder) {
+      Cuser.emailid = namefinder;
+      Cuser.name = i["Name"];
+    }
+  }
 }

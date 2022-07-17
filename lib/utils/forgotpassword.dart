@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:project/utils/global.dart';
 import 'package:project/utils/styles.dart';
 
 ResetPassword(
@@ -32,10 +33,17 @@ ResetPassword(
               ),
               MaterialButton(
                 onPressed: () async {
-                  print("object");
-                  await firebaseAuth.sendPasswordResetEmail(email: email.text);
-                  print("00");
-                  Navigator.of(ctx).pop();
+                  try {
+                    print("object");
+                    await firebaseAuth.sendPasswordResetEmail(
+                        email: email.text);
+                    restsender = 1;
+                    print("00");
+                    Navigator.of(ctx).pop();
+                  } catch (e) {
+                    restsender = 0;
+                    print(e);
+                  }
                 },
                 child: Text(
                   'Reset Password',
