@@ -54,6 +54,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
           .then((value) => print("User Added"))
           .catchError((error) => print("Failed to add user: $error"));
       showToast('Registration Successful', Colors.grey[500]!);
+      _userreg(_nameControllerStudent.text, 0, _emailControllerStudent.text);
       CStudent.name = _nameControllerStudent.text;
       CStudent.email = _emailControllerStudent.text;
       CStudent.dob = _dobControllerStudent.text;
@@ -74,6 +75,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
     ;
   }
 
+  void _userreg(String name, int level, String email) async {
+    users.doc(email).set(({"Name": name, "Level": level, "Email": email}));
+  }
+
   void _regbuttonTeacher() async {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
@@ -89,6 +94,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
           .then((value) => print("User Added"))
           .catchError((error) => print("Failed to add user: $error"));
       showToast('Registration Successful', Colors.grey[500]!);
+      _userreg(_nameControllerTeacher.text, 1, _emailControllerTeacher.text);
       CTeacher.name = _nameControllerTeacher.text;
       CTeacher.email = _emailControllerTeacher.text;
       CTeacher.employeeId = _employeeIdControllerTeacher.text;
@@ -367,7 +373,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Get.toNamed('/');
+            Navigator.pop(context);
           },
         ),
       ),

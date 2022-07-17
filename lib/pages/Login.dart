@@ -5,7 +5,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:project/utils/global.dart';
 import 'package:project/utils/styles.dart';
+import '../utils/forgotpassword.dart';
 import 'firstpage.dart';
 
 class LoginPage extends StatefulWidget {
@@ -40,28 +42,28 @@ class _LoginPageState extends State<LoginPage> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
           backgroundColor: Colors.white,
-          appBar: AppBar(
-            // title: Text("Login"),
-            backgroundColor: Colors.teal,
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                Get.toNamed('/');
-              },
-            ),
-          ),
+          // appBar: AppBar(
+          //   // title: Text("Login"),
+          //   backgroundColor: Colors.teal,
+          //   leading: IconButton(
+          //     icon: Icon(Icons.arrow_back),
+          //     onPressed: () {
+          //       Get.toNamed('/');
+          //     },
+          //   ),
+          // ),
           body: SingleChildScrollView(
               child: Stack(
             children: <Widget>[
               CachedNetworkImage(
                 imageUrl:
                     "https://cdn.pixabay.com/photo/2019/03/21/15/51/chatbot-4071274_960_720.jpg",
-                // height: 250,
+                // height: MediaQuery.of(context).size.height * 0.35,
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
                 margin: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.29),
+                    top: MediaQuery.of(context).size.height * 0.30),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: Colors.white,
@@ -138,8 +140,27 @@ class _LoginPageState extends State<LoginPage> {
                             isDense: true,
                             hintText: "Password"),
                       ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.01,
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: MaterialButton(
+                            onPressed: () async {
+                              await ResetPassword(
+                                  context, _emailController, _firebaseAuth);
+                              showToast(
+                                  "Reset Link has been Sent", Colors.grey);
+                            },
+                            child: Text("Forgot password ?",
+                                style: TextStyle(
+                                  color: Colors.blueAccent,
+                                  fontSize: 17,
+                                ))),
+                      ),
                       Padding(
-                        padding: EdgeInsets.only(top: 20),
+                        padding: EdgeInsets.only(
+                            top: MediaQuery.of(context).size.height * 0.01),
                         child: MaterialButton(
                           onPressed: () async {
                             // print(_emailController.toString() +
@@ -151,7 +172,9 @@ class _LoginPageState extends State<LoginPage> {
                                       email: _emailController.text,
                                       password: _passwordController.text)
                                   .then((value) => print('Login Successful'));
-                              Get.toNamed("/first");
+
+                              Redirector(_emailController.text);
+
                               showToast('Login Successful', Colors.grey[500]!);
                             } catch (e) {
                               String error;

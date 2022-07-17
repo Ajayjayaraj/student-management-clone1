@@ -17,31 +17,39 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.school_outlined, size: MediaQuery.of(context).size.height*0.15),
-            SizedBox(height: MediaQuery.of(context).size.height*0.05),
-            Text("Authentication", style: TextStyle(fontSize: MediaQuery.of(context).size.width*0.08),),
+            Icon(Icons.school_outlined,
+                size: MediaQuery.of(context).size.height * 0.15),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+            Text(
+              "Authentication",
+              style:
+                  TextStyle(fontSize: MediaQuery.of(context).size.width * 0.08),
+            ),
             Container(
-              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.1),
-              margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.13,vertical: 0),
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.1),
+              margin: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width * 0.13,
+                  vertical: 0),
               child: MaterialButton(
-                onPressed: (){
+                onPressed: () {
                   Get.toNamed("/login");
-                },//since this is only a UI app
-                child: Text('SIGN IN',
+                }, //since this is only a UI app
+                child: Text(
+                  'SIGN IN',
                   style: TextStyle(
                     fontSize: 15,
                     fontFamily: 'SFUIDisplay',
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                color: Colors.cyan,//Color(0xffff2d55),
+                color: Colors.cyan, //Color(0xffff2d55),
                 elevation: 0,
                 minWidth: 400,
                 height: 50,
                 textColor: Colors.white,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)
-                ),
+                    borderRadius: BorderRadius.circular(10)),
               ),
             ),
             // Container(

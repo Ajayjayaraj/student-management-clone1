@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/pages/qrgenerator.dart';
+import 'package:project/utils/global.dart';
 
 class FirstPage extends StatefulWidget {
   const FirstPage({Key? key}) : super(key: key);
@@ -18,10 +20,20 @@ class _FirstPageState extends State<FirstPage> {
         appBar: AppBar(
           backgroundColor: Colors.teal,
           title: Text('First Page'),
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () => Get.back(),
-          ),
+          actions: [
+            IconButton(
+                onPressed: (() {
+                  setState(() {
+                    Get.toNamed('/login');
+                    FirebaseAuth.instance.signOut();
+                  });
+                }),
+                icon: Icon(Icons.logout_outlined))
+          ],
+          // leading: IconButton(
+          //   icon: Icon(Icons.arrow_back),
+          //   onPressed: () => Get.back(),
+          // ),
         ),
         body: Center(
             child: Column(
@@ -72,6 +84,15 @@ class _FirstPageState extends State<FirstPage> {
                 Get.toNamed('/qrscan');
               },
             ),
+            // SizedBox(
+            //   height: 30,
+            // ),
+            // MaterialButton(
+            //   child: Text("Print"),
+            //   onPressed: () async {
+            //     await getData();
+            //   },
+            // )
           ],
         )),
       ),

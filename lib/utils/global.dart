@@ -1,9 +1,16 @@
-class User {
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+
+import '../MainScreens/widgettree.dart';
+
+class UserApp {
   String name = "";
   String emailid = "";
 }
 
-User Cuser = new User();
+UserApp Cuser = new UserApp();
 String idtosearch = "";
 
 class Student {
@@ -29,3 +36,38 @@ class Teacher {
 }
 
 Teacher CTeacher = new Teacher();
+
+Future<int> getData(String email) async {
+  CollectionReference _collectionRef =
+      FirebaseFirestore.instance.collection('users');
+  late var allData;
+  QuerySnapshot querySnapshot = await _collectionRef.get();
+  allData = await querySnapshot.docs.map((doc) => doc.data()).toList();
+  for (var i in allData) {
+    if (i["Email"] == email) {
+      print(i);
+      if (int.parse(i["Level"].toString()).isEqual(0))
+        return 0;
+      else
+        return 1;
+    }
+  }
+  return -1;
+}
+
+void Redirector(String email) async {
+  print(await getData(email));
+  if (await getData(email) == 1) {
+    Get.toNamed("/first");
+  } else if (await getData(email) == 0) {
+    Get.toNamed("/studentfirst");
+  }
+}
+
+Future<Widget> Redirector2(String email) async {
+  print(await getData(email));
+  if (await getData(email) == 1) {
+    return Decider('/first');
+  } else
+    return Decider('/studentfirst');
+}
