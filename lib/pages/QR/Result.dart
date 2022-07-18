@@ -36,10 +36,10 @@ class _QrResultState extends State<QrResult> {
   }
 
   @override
-  void initState() async {
+  void initState() {
     // TODO: implement initState
     super.initState();
-    await getData();
+    getData();
   }
 
   Widget build(BuildContext context) {

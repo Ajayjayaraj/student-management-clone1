@@ -6,8 +6,7 @@ import 'package:project/pages/seeAll.dart';
 import 'package:project/utils/global.dart';
 import '../QR/qrscan.dart';
 
-int count = 0;
-List<int> arr = [0, 0, 0, 0, 0];
+List<int> arr = [0, 0, 0, 0];
 
 class FirstPage extends StatefulWidget {
   const FirstPage({Key? key}) : super(key: key);
@@ -27,63 +26,65 @@ class _FirstPageState extends State<FirstPage> {
 
   int randInt() {
     var random = Random();
-    int k = random.nextInt(5);
+    int k = random.nextInt(4);
     return k;
   }
 
   Color pickColor() {
-    var random = Random();
     int count = 0;
     final colorList = [
       Colors.grey,
       Color(0xfffa9881),
-      Color(0xff71b4fb),
       Color(0xffb1a5f6),
       Color(0xff71b4fb),
     ];
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 4; i++) {
       if (arr[i] == 1) {
         count++;
       }
     }
-    if (count == 5) {
-      for (int i = 0; i < 5; i++) {
+    if (count == 3) {
+      for (int i = 0; i < 4; i++) {
         arr[i] = 0;
       }
+      print("hello");
+      count = 0;
     }
     int k = randInt();
     while (arr[k] != 0) {
       k = randInt();
     }
+    print("K : " + k.toString());
     arr[k] = 1;
     return colorList[k];
   }
 
-  Widget buttonTile(String text, String route) {
-    return Padding(
-      padding: EdgeInsets.only(
-          right: MediaQuery.of(context).size.width *
-              0.06), //MediaQuery.of(context).size.width * 0.1,
-      child: MaterialButton(
-        color: pickColor(), //Color(0xffff2d55),
-        elevation: 0,
-        minWidth: 150,
-        height: 50,
-        textColor: Colors.white,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        child: Text(
-          "$text",
-          style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),
-        ),
-        onPressed: () {
-          Get.toNamed('$route');
-        },
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
+    double padding_length = MediaQuery.of(context).size.width * 0.05;
+    Widget buttonTile(String text, String route) {
+      return Padding(
+        padding:
+            EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.06),
+        child: MaterialButton(
+          color: pickColor(), //Color(0xffff2d55),
+          elevation: 0,
+          minWidth: 150,
+          height: 50,
+          textColor: Colors.white,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(padding_length)),
+          child: Text(
+            "$text",
+            style: TextStyle(fontSize: padding_length),
+          ),
+          onPressed: () {
+            Get.toNamed('$route');
+          },
+        ),
+      );
+    }
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -108,7 +109,7 @@ class _FirstPageState extends State<FirstPage> {
             ],
           ),
           body: SingleChildScrollView(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.all(padding_length),
             child: Column(
               children: <Widget>[
                 Padding(
@@ -133,7 +134,8 @@ class _FirstPageState extends State<FirstPage> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                  padding:
+                      EdgeInsets.fromLTRB(0, padding_length, 0, padding_length),
                   child: Align(
                     alignment: Alignment.topLeft,
                     child: Row(
@@ -169,21 +171,18 @@ class _FirstPageState extends State<FirstPage> {
                       buttonTile("QR Generator", '/qrgenerator'),
                       Padding(
                         padding: EdgeInsets.only(
-                            right: MediaQuery.of(context).size.width *
-                                0.06), //MediaQuery.of(context).size.width * 0.1,
+                            right: MediaQuery.of(context).size.width * 0.06),
                         child: MaterialButton(
                           color: pickColor(), //Color(0xffff2d55),
                           elevation: 0,
-                          minWidth: 150,
-                          height: 50,
+                          minWidth: MediaQuery.of(context).size.width * 0.38,
                           textColor: Colors.white,
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
+                              borderRadius:
+                                  BorderRadius.circular(padding_length)),
                           child: Text(
                             "QR Scanner",
-                            style: TextStyle(
-                                fontSize:
-                                    MediaQuery.of(context).size.width * 0.05),
+                            style: TextStyle(fontSize: padding_length),
                           ),
                           onPressed: () async {
                             // Get.toNamed('/qrscan');
