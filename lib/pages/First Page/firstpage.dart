@@ -1,13 +1,10 @@
-import 'dart:ffi';
 import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:project/pages/qrgenerator.dart';
 import 'package:project/pages/seeAll.dart';
 import 'package:project/utils/global.dart';
-import 'package:qrscan/qrscan.dart' as scanner;
+import '../QR/qrscan.dart';
 
 int count = 0;
 List<int> arr = [0, 0, 0, 0, 0];

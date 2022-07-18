@@ -1,14 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:project/MainScreens/pagechanger.dart';
-import 'package:project/pages/Result.dart';
-import 'package:project/pages/qrgenerator.dart';
-import 'package:project/pages/qrscan.dart';
-import '../pages/Login.dart';
-import '../pages/firstpage.dart';
-import '../pages/homepage.dart';
-import '../pages/registration.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 Future<void> main() async {

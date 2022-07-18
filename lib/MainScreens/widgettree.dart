@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/pages/Result.dart';
-import 'package:project/pages/qrgenerator.dart';
-import 'package:project/pages/qrscan.dart';
-import 'package:project/pages/studentfirst.dart';
-import '../pages/Login.dart';
-import '../pages/firstpage.dart';
+import '../pages/First Page/firstpage.dart';
+import '../pages/First Page/studentfirst.dart';
+import '../pages/QR/Result.dart';
+import '../pages/QR/qrgenerator.dart';
+import '../pages/Registration/Login.dart';
 import '../pages/homepage.dart';
-import '../pages/registration.dart';
+import '../pages/Registration/registration.dart';
 
 Widget Decider(String page) {
   return GetMaterialApp(
@@ -19,7 +18,7 @@ Widget Decider(String page) {
       GetPage(name: '/register', page: () => RegistrationPage()),
       GetPage(name: '/first', page: () => FirstPage()),
       GetPage(name: '/qrgenerator', page: () => QrGenerator()),
-      GetPage(name: '/qrscan', page: () => QrScan()),
+      // GetPage(name: '/qrscan', page: () => QrScan()),
       GetPage(name: '/qrres', page: () => QrResult()),
       GetPage(name: '/studentfirst', page: (() => StudentFirst())),
     ],

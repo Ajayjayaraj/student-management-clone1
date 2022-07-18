@@ -7,8 +7,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:project/utils/global.dart';
 import 'package:project/utils/styles.dart';
-import '../utils/forgotpassword.dart';
-import 'firstpage.dart';
+import '../../utils/forgotpassword.dart';
+import '../addon.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -19,14 +19,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   @override
-  void showToast(String s, Color c) {
-    Fluttertoast.showToast(
-        msg: s,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: c,
-        textColor: Colors.white);
-  }
 
   var _passwordVisible = false;
   void initState() {
