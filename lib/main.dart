@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:project/MainScreens/pagechanger.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:project/utils/global.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +23,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
+    getDetails();
     Future.delayed(Duration(seconds: 4), () {
       Navigator.pop(context);
       Navigator.push(

@@ -173,7 +173,7 @@ class _LoginPageState extends State<LoginPage> {
                                       email: _emailController.text,
                                       password: _passwordController.text)
                                   .then((value) => print('Login Successful'));
-
+                              await getDetails();
                               Redirector(_emailController.text);
                               setState(() {
                                 isloading = true;
