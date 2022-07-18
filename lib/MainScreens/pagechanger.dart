@@ -22,11 +22,13 @@ class _PagechangerState extends State<Pagechanger> {
     // TODO: implement initState
     super.initState();
     User? user = FirebaseAuth.instance.currentUser;
-
+    Future.delayed(Duration(seconds: 4), () async* {
+      await getDetails();
+    });
     if (user != null) {
       i = 1;
-      getDetails();
     }
+
     // Navigator.pop(context);
   }
 

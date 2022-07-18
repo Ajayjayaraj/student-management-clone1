@@ -19,7 +19,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   @override
-
   var _passwordVisible = false;
   var successfulLogin = false;
   var isLoading = true;
@@ -31,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
+  bool isloading = true;
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -69,8 +68,8 @@ class _LoginPageState extends State<LoginPage> {
                   color: Colors.white,
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(
-                      MediaQuery.of(context).size.height * 0.02),
+                  padding:
+                      EdgeInsets.all(MediaQuery.of(context).size.height * 0.02),
                   child: ListView(
                     shrinkWrap:
                         true, //you must add this if you place listview inside scrollview
@@ -118,8 +117,7 @@ class _LoginPageState extends State<LoginPage> {
                             focusedBorder: new OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10.0)),
-                                borderSide:
-                                    new BorderSide(color: Colors.cyan)),
+                                borderSide: new BorderSide(color: Colors.cyan)),
                             enabledBorder: new OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10.0)),
@@ -172,23 +170,31 @@ class _LoginPageState extends State<LoginPage> {
                             // print(_emailController.toString() +
                             //     " " +
                             //     _passwordController.toString());
+                            setState(() {
+                              isloading = false;
+                            });
                             try {
                               await _firebaseAuth
                                   .signInWithEmailAndPassword(
                                       email: _emailController.text,
                                       password: _passwordController.text)
                                   .then((value) => print('Login Successful'));
-        
+                              await getDetails();
                               Redirector(_emailController.text);
-
                               successfulLogin = true;
-        
+                              setState(() {
+                                isloading = true;
+                              });
+                              showToast('Login Successful', Colors.grey[500]!);
                             } catch (e) {
+                              setState(() {
+                                isloading = true;
+                              });
                               String error;
                               error = e.toString();
                               int kpp = error.lastIndexOf(']') + 1;
-                              showToast('${error.substring(kpp)}',
-                                  Colors.red[300]!);
+                              showToast(
+                                  '${error.substring(kpp)}', Colors.red[300]!);
                             }
                             setState(() {
                               if(successfulLogin){
@@ -198,17 +204,21 @@ class _LoginPageState extends State<LoginPage> {
                               isLoading = true;
                             });
                           },
-                          child: Text(
-                            'SIGN IN',
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontFamily: 'SFUIDisplay',
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                          child: isloading
+                              ? Text(
+                                  'SIGN IN',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontFamily: 'SFUIDisplay',
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )
+                              : CircularProgressIndicator(
+                                  color: Colors.white,
+                                ),
                           color: Colors.cyan, //Color(0xffff2d55),
                           elevation: 0,
-                          minWidth: 400,
+                          minWidth: 200,
                           height: 50,
                           textColor: Colors.white,
                           shape: RoundedRectangleBorder(
