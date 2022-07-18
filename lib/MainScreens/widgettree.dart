@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project/pages/QR/qrscan_biometry.dart';
+import 'package:project/pages/newpage.dart';
 import '../pages/First Page/firstpage.dart';
 import '../pages/First Page/studentfirst.dart';
 import '../pages/QR/Result.dart';
@@ -18,9 +20,10 @@ Widget Decider(String page) {
       GetPage(name: '/register', page: () => RegistrationPage()),
       GetPage(name: '/first', page: () => FirstPage()),
       GetPage(name: '/qrgenerator', page: () => QrGenerator()),
-      // GetPage(name: '/qrscan', page: () => QrScan()),
+      GetPage(name: '/qrbio', page: () => QrBiometry()),
       GetPage(name: '/qrres', page: () => QrResult()),
       GetPage(name: '/studentfirst', page: (() => StudentFirst())),
+      GetPage(name: '/newPage', page: (() => NewPage())),
     ],
   );
 }

@@ -190,7 +190,27 @@ class _FirstPageState extends State<FirstPage> {
                           },
                         ),
                       ),
-                      // buttonTile("QR Scanner", '/qrscan'),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            right: MediaQuery.of(context).size.width * 0.06),
+                        child: MaterialButton(
+                          color: pickColor(), //Color(0xffff2d55),
+                          elevation: 0,
+                          minWidth: MediaQuery.of(context).size.width * 0.38,
+                          textColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(padding_length)),
+                          child: Text(
+                            "QR Biometry",
+                            style: TextStyle(fontSize: padding_length),
+                          ),
+                          onPressed: () async {
+                            // Get.toNamed('/qrscan');
+                            biofn();
+                          },
+                        ),
+                      ),
                     ],
                   ),
                 ),
