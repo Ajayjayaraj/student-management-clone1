@@ -43,11 +43,10 @@ class _FirstPageState extends State<FirstPage> {
         count++;
       }
     }
-    if (count == 3) {
+    if (count == 4) {
       for (int i = 0; i < 4; i++) {
         arr[i] = 0;
       }
-      print("hello");
       count = 0;
     }
     int k = randInt();

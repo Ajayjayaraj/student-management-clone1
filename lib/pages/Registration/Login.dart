@@ -21,6 +21,9 @@ class _LoginPageState extends State<LoginPage> {
   @override
 
   var _passwordVisible = false;
+  var successfulLogin = false;
+  var isLoading = true;
+
   void initState() {
     _passwordVisible = false;
   }
@@ -161,8 +164,11 @@ class _LoginPageState extends State<LoginPage> {
                       Padding(
                         padding: EdgeInsets.only(
                             top: MediaQuery.of(context).size.height * 0.03),
-                        child: MaterialButton(
+                         child: isLoading ? MaterialButton(
                           onPressed: () async {
+                            setState(() {
+                              isLoading = false;
+                            });
                             // print(_emailController.toString() +
                             //     " " +
                             //     _passwordController.toString());
@@ -174,9 +180,9 @@ class _LoginPageState extends State<LoginPage> {
                                   .then((value) => print('Login Successful'));
         
                               Redirector(_emailController.text);
+
+                              successfulLogin = true;
         
-                              showToast(
-                                  'Login Successful', Colors.grey[500]!);
                             } catch (e) {
                               String error;
                               error = e.toString();
@@ -184,6 +190,13 @@ class _LoginPageState extends State<LoginPage> {
                               showToast('${error.substring(kpp)}',
                                   Colors.red[300]!);
                             }
+                            setState(() {
+                              if(successfulLogin){
+                                showToast(
+                                  'Login Successful', Colors.grey[500]!);
+                              }
+                              isLoading = true;
+                            });
                           },
                           child: Text(
                             'SIGN IN',
@@ -192,6 +205,19 @@ class _LoginPageState extends State<LoginPage> {
                               fontFamily: 'SFUIDisplay',
                               fontWeight: FontWeight.bold,
                             ),
+                          ),
+                          color: Colors.cyan, //Color(0xffff2d55),
+                          elevation: 0,
+                          minWidth: 400,
+                          height: 50,
+                          textColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                        ): MaterialButton(
+                          onPressed: () {},
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                            // backgroundColor: Colors.cyan,
                           ),
                           color: Colors.cyan, //Color(0xffff2d55),
                           elevation: 0,
