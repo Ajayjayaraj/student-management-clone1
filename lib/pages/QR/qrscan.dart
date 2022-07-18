@@ -60,7 +60,7 @@ Future<void> qrfn() async {
 }
 
 Future<void> biofn() async {
-  int k = await getData1();
+  // int k = await getData1();
   String cameraScanResult = "k";
   print("hello");
   var camerastatus = await Permission.camera.status;
@@ -79,10 +79,10 @@ Future<void> biofn() async {
       idtosearch = cameraScanResult;
     }
   }
-  if (k == 1) {
+  // if (k == 1) {
     Get.toNamed('/qrbio');
-  } else {
-    showToast("No such user", Colors.red);
-    Get.toNamed('/first');
-  }
+  // } else {
+    // showToast("No such user", Colors.red);
+    // Get.toNamed('/first');
+  // }
 }
