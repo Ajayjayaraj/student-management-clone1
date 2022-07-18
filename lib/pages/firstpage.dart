@@ -1,8 +1,16 @@
+import 'dart:ffi';
+import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:project/pages/qrgenerator.dart';
+import 'package:project/pages/seeAll.dart';
 import 'package:project/utils/global.dart';
+import 'package:qrscan/qrscan.dart' as scanner;
+
+int count = 0;
+List<int> arr = [0, 0, 0, 0, 0];
 
 class FirstPage extends StatefulWidget {
   const FirstPage({Key? key}) : super(key: key);
@@ -12,6 +20,7 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
+  String cameraScanResult = "k";
   @override
   void initState() {
     // TODO: implement initState
@@ -19,90 +28,179 @@ class _FirstPageState extends State<FirstPage> {
     getDetails();
   }
 
+  int randInt() {
+    var random = Random();
+    int k = random.nextInt(5);
+    return k;
+  }
+
+  Color pickColor() {
+    var random = Random();
+    int count = 0;
+    final colorList = [
+      Colors.grey,
+      Color(0xfffa9881),
+      Color(0xff71b4fb),
+      Color(0xffb1a5f6),
+      Color(0xff71b4fb),
+    ];
+    for (int i = 0; i < 5; i++) {
+      if (arr[i] == 1) {
+        count++;
+      }
+    }
+    if (count == 5) {
+      for (int i = 0; i < 5; i++) {
+        arr[i] = 0;
+      }
+    }
+    int k = randInt();
+    while (arr[k] != 0) {
+      k = randInt();
+    }
+    arr[k] = 1;
+    return colorList[k];
+  }
+
+  Widget buttonTile(String text, String route) {
+    return Padding(
+      padding: EdgeInsets.only(
+          right: MediaQuery.of(context).size.width *
+              0.06), //MediaQuery.of(context).size.width * 0.1,
+      child: MaterialButton(
+        color: pickColor(), //Color(0xffff2d55),
+        elevation: 0,
+        minWidth: 150,
+        height: 50,
+        textColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        child: Text(
+          "$text",
+          style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),
+        ),
+        onPressed: () {
+          Get.toNamed('$route');
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.teal,
-          title: Text('First Page'),
-          actions: [
-            IconButton(
-                onPressed: (() {
-                  setState(() {
-                    Get.toNamed('/login');
-                    FirebaseAuth.instance.signOut();
-                  });
-                }),
-                icon: Icon(Icons.logout_outlined))
-          ],
-          // leading: IconButton(
-          //   icon: Icon(Icons.arrow_back),
-          //   onPressed: () => Get.back(),
-          // ),
-        ),
-        body: Center(
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: Colors.grey[100],
+            leading: const Icon(
+              Icons.short_text,
+              size: 30,
+              color: Colors.black,
+            ),
+            actions: [
+              IconButton(
+                  color: Colors.black,
+                  onPressed: (() {
+                    setState(() {
+                      Get.toNamed('/login');
+                      FirebaseAuth.instance.signOut();
+                    });
+                  }),
+                  icon: Icon(Icons.logout_outlined))
+            ],
+          ),
+          body: SingleChildScrollView(
+            padding: EdgeInsets.all(20),
             child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            MaterialButton(
-              color: Colors.cyan, //Color(0xffff2d55),
-              elevation: 0,
-              minWidth: 200,
-              height: 50,
-              textColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              child: Text("Registration"),
-              onPressed: () {
-                Get.toNamed('/register');
-              },
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Hello,",
+                            style: TextStyle(
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.06,
+                                color: Colors.grey)),
+                        Text("${Cuser.name}",
+                            style: TextStyle(
+                              fontSize: MediaQuery.of(context).size.width * 0.1,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Category",
+                            style: TextStyle(
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.055,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black)),
+                        MaterialButton(
+                          onPressed: () {
+                            seeAll(context);
+                          },
+                          child: Text("See All",
+                              style: TextStyle(
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.055,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black)),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.25,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: <Widget>[
+                      buttonTile("Registration", '/register'),
+                      buttonTile("QR Generator", '/qrgenerator'),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            right: MediaQuery.of(context).size.width *
+                                0.06), //MediaQuery.of(context).size.width * 0.1,
+                        child: MaterialButton(
+                          color: pickColor(), //Color(0xffff2d55),
+                          elevation: 0,
+                          minWidth: 150,
+                          height: 50,
+                          textColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Text(
+                            "QR Scanner",
+                            style: TextStyle(
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.05),
+                          ),
+                          onPressed: () async {
+                            // Get.toNamed('/qrscan');
+                            qrfn();
+                          },
+                        ),
+                      ),
+                      // buttonTile("QR Scanner", '/qrscan'),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            SizedBox(
-              height: 30,
-            ),
-            MaterialButton(
-              color: Colors.cyan, //Color(0xffff2d55),
-              elevation: 0,
-              minWidth: 200,
-              height: 50,
-              textColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              child: Text("Qr Generator"),
-              onPressed: () {
-                Get.toNamed('/qrgenerator');
-              },
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            MaterialButton(
-              color: Colors.cyan, //Color(0xffff2d55),
-              elevation: 0,
-              minWidth: 200,
-              height: 50,
-              textColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              child: Text("Qr Scan"),
-              onPressed: () {
-                Get.toNamed('/qrscan');
-              },
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            MaterialButton(
-              child: Text("Print"),
-              onPressed: () {
-                print(Cuser.name);
-              },
-            )
-          ],
-        )),
-      ),
+          )),
     );
   }
 }

@@ -8,6 +8,7 @@
         android:label="project"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        tools:replace="android:icon"
         <activity
             android:name=".MainActivity"
             android:exported="true"

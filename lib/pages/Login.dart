@@ -41,24 +41,24 @@ class _LoginPageState extends State<LoginPage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-          backgroundColor: Colors.white,
-          // appBar: AppBar(
-          //   // title: Text("Login"),
-          //   backgroundColor: Colors.teal,
-          //   leading: IconButton(
-          //     icon: Icon(Icons.arrow_back),
-          //     onPressed: () {
-          //       Get.toNamed('/');
-          //     },
-          //   ),
-          // ),
-          body: SingleChildScrollView(
-              child: Stack(
+        backgroundColor: Colors.white,
+        // appBar: AppBar(
+        //   // title: Text("Login"),
+        //   backgroundColor: Colors.blueGrey,
+        //   leading: IconButton(
+        //     icon: Icon(Icons.arrow_back),
+        //     onPressed: () {
+        //       Get.toNamed('/');
+        //     },
+        //   ),
+        // ),
+        body: SingleChildScrollView(
+          child: Stack(
             children: <Widget>[
               CachedNetworkImage(
                 imageUrl:
                     "https://i0.wp.com/www.artofvfx.com/IM2/IM2_PROLOGUE_VFX_15.jpg",
-                height: MediaQuery.of(context).size.height * 0.35,
+                height: MediaQuery.of(context).size.height * 0.4,
                 width: MediaQuery.of(context).size.width,
                 fit: BoxFit.cover,
               ),
@@ -68,14 +68,14 @@ class _LoginPageState extends State<LoginPage> {
               Container(
                 width: MediaQuery.of(context).size.width,
                 margin: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.30),
+                    top: MediaQuery.of(context).size.height * 0.35),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: Colors.white,
                 ),
                 child: Padding(
-                  padding:
-                      EdgeInsets.all(MediaQuery.of(context).size.height * 0.02),
+                  padding: EdgeInsets.all(
+                      MediaQuery.of(context).size.height * 0.02),
                   child: ListView(
                     shrinkWrap:
                         true, //you must add this if you place listview inside scrollview
@@ -123,7 +123,8 @@ class _LoginPageState extends State<LoginPage> {
                             focusedBorder: new OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10.0)),
-                                borderSide: new BorderSide(color: Colors.cyan)),
+                                borderSide:
+                                    new BorderSide(color: Colors.cyan)),
                             enabledBorder: new OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10.0)),
@@ -167,7 +168,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       Padding(
                         padding: EdgeInsets.only(
-                            top: MediaQuery.of(context).size.height * 0.01),
+                            top: MediaQuery.of(context).size.height * 0.03),
                         child: MaterialButton(
                           onPressed: () async {
                             // print(_emailController.toString() +
@@ -179,16 +180,17 @@ class _LoginPageState extends State<LoginPage> {
                                       email: _emailController.text,
                                       password: _passwordController.text)
                                   .then((value) => print('Login Successful'));
-
+        
                               Redirector(_emailController.text);
-
-                              showToast('Login Successful', Colors.grey[500]!);
+        
+                              showToast(
+                                  'Login Successful', Colors.grey[500]!);
                             } catch (e) {
                               String error;
                               error = e.toString();
                               int kpp = error.lastIndexOf(']') + 1;
-                              showToast(
-                                  '${error.substring(kpp)}', Colors.red[300]!);
+                              showToast('${error.substring(kpp)}',
+                                  Colors.red[300]!);
                             }
                           },
                           child: Text(
@@ -208,32 +210,34 @@ class _LoginPageState extends State<LoginPage> {
                               borderRadius: BorderRadius.circular(10)),
                         ),
                       ),
-                      SizedBox(
-                        height: 40,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "New user ?",
-                          ),
-                          MaterialButton(
-                              onPressed: () {
-                                // Get.toNamed("/register");
-                              },
-                              child: Text("Register now",
-                                  style: TextStyle(
-                                      color: Colors.red[800],
-                                      fontSize: 18,
-                                      decoration: TextDecoration.underline)))
-                        ],
-                      ),
+                      // SizedBox(
+                      //   height: 40,
+                      // ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   children: [
+                      //     Text(
+                      //       "New user ?",
+                      //     ),
+                      //     MaterialButton(
+                      //         onPressed: () {
+                      //           // Get.toNamed("/register");
+                      //         },
+                      //         child: Text("Register now",
+                      //             style: TextStyle(
+                      //                 color: Colors.red[800],
+                      //                 fontSize: 18,
+                      //                 decoration: TextDecoration.underline)))
+                      //   ],
+                      // ),
                     ],
                   ),
                 ),
               )
             ],
-          ))),
+          ),
+        ),
+      ),
     );
   }
 }
